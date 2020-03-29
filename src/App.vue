@@ -1,32 +1,47 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+<div id="app">
+	<Map
+		:pharmacyArr="pharmacyArr"
+		:city="area.city"
+		:district="area.district"
+	></Map>
+</div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import Map from '@/components/Map/index.vue';
+import axios from 'axios';
+const apiUrl = 'https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json';
+export default {
+	data: () => ({
+		pharmacyArr: [],
+		area: {
+			city: '臺北市',
+			district: '大安區'
+		},
+		centerPos: {
+			lng: 0,
+			lat: 0
+		}
+	}),
+	methods: {
+		getData() {
+			return axios.get(apiUrl);
+		}
+	},
+	async created() {
+		this.pharmacyArr = await this.getData().then(res => res.data.features);
+	},
+	components: {
+		Map
+	},
 }
+</script>
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+<style lang="scss">
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 </style>
