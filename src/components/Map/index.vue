@@ -35,18 +35,13 @@ export default {
    methods: {
       initMap() {
          map = L.map('map', {
-            center: [22.6743792, 120.1815641],
-            zoom: 12
+            center: [24.9875278, 121.3646047],
+            zoom: 11
          });
          L.tileLayer(mapKey, {
             maxZoom: 18,
          }).addTo(map);
       },
-   },
-   watch: {
-      currentData(to) {
-         console.log(to)
-      }
    },
    mounted() {
       this.initMap();
