@@ -34,6 +34,12 @@ let mapController = {
          }
       });
    },
+   panto(position) {
+      let { lat, lng } = position;
+      map.panTo([lat, lng], {
+         animate: false
+      });
+   }
 }
 export default {
 	props: {
@@ -55,12 +61,12 @@ export default {
          if (this.pharmacyArr.length === 0) return [];
          return this.pharmacyArr.filter(pharmacy => {
             let { county, town } = pharmacy.properties;
-            if (this.district !== '') {
-               return county === this.city && town === this.district;
-            } else {
-               return county === this.city;
-            }
+            return county === this.city && town === this.district;
          });
+      },
+      areaPosition() {
+         let [ lng, lat ] = this.currentData[0].geometry.coordinates;
+         return { lng, lat };
       }
    },
    methods: {
@@ -83,6 +89,7 @@ export default {
       currentData() {
          mapController.removeMarker();
          this.addMark();
+         mapController.panto(this.areaPosition);
       }
    },
    mounted() {

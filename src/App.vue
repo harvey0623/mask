@@ -26,10 +26,6 @@ export default {
 			city: '臺北市',
 			district: '大安區'
 		},
-		centerPos: {
-			lng: 0,
-			lat: 0
-		}
 	}),
 	methods: {
 		getData() {

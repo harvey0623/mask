@@ -8,10 +8,9 @@
       >{{ city.cityName }}</option>
    </select>
    <select class="form-control" v-model="districtB">
-      <option value="" disabled>請選擇</option>
       <option 
-         v-for="item in districtList"
-         :key="item.ZipCode"
+         v-for="(item,index) in districtList"
+         :key="index"
          :value="item.AreaName"
       >{{ item.AreaName }}</option>
    </select>
@@ -59,11 +58,14 @@ export default {
          }, []);
       },
       districtList() {
-         this.districtB = '';
          if (this.area.length === 0) return [];
          let targetCity = this.area.find(item => item.CityName === this.cityB);
-         if (targetCity !== undefined) return targetCity.AreaList;
-         else return [];
+         if (targetCity !== undefined) {
+            this.districtB = targetCity.AreaList[0].AreaName;
+            return targetCity.AreaList;
+         } else {
+            return [];
+         }
       }
    }
 }
