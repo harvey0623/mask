@@ -1,46 +1,14 @@
 <template>
 <div id="map">
-   
+
 </div>
 </template>
 
 <script>
 import L from 'leaflet';
+import Controller from './controller.js';
 const mapKey = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-let map = null;
-let mapController = {
-   addMark(item) {
-      let { geometry, properties } = item;
-      let [ lng, lat ] = geometry.coordinates;
-      let marker = L.marker([lat, lng]).addTo(map).bindPopup(this.renderHtml(properties));
-   },
-   renderHtml(data) {
-      const url = 'https://www.google.com.tw/maps/place/'
-      return `
-         <p class="siteName">${data.name}</p>
-         <p class="count">
-            口罩剩餘:
-            成人:${data.mask_adult}個 /
-            小孩:${data.mask_child}個
-         </p>  
-         <a href="${url + data.address}" target="_blank">地址:${data.address}</a>
-         <p class="phone">電話:${data.phone}</p>
-         <p class="updateTime">更新時間:${data.updated}</p>`
-   },
-   removeMarker() {
-      map.eachLayer((layer) => {
-         if (layer instanceof L.Marker) {
-            map.removeLayer(layer);
-         }
-      });
-   },
-   panto(position) {
-      let { lat, lng } = position;
-      map.panTo([lat, lng], {
-         animate: false
-      });
-   }
-}
+const controller = new Controller();
 export default {
 	props: {
       pharmacyArr: {
@@ -71,25 +39,25 @@ export default {
    },
    methods: {
       initMap() {
-         map = L.map('map', {
+         controller.map = L.map('map', {
             center: [24.9875278, 121.3646047],
-            zoom: 12
+            zoom: 16
          });
          L.tileLayer(mapKey, {
-            maxZoom: 18,
-         }).addTo(map);
+            maxZoom: 20,
+         }).addTo(controller.map);
       },
       addMark() {
          this.currentData.forEach(item => {
-            mapController.addMark(item);
+            controller.addMark(item);
          });
       },
    },
    watch: {
       currentData() {
-         mapController.removeMarker();
+         controller.removeMarker();
          this.addMark();
-         mapController.panto(this.areaPosition);
+         controller.panto(this.areaPosition);
       }
    },
    mounted() {
