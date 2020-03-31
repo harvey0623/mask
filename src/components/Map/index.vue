@@ -1,63 +1,40 @@
 <template>
-<div id="map">
-
-</div>
+<div id="map"></div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import L from 'leaflet';
 import Controller from './controller.js';
 const mapKey = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const controller = new Controller();
 export default {
-	props: {
-      pharmacyArr: {
-         type: Array,
-         required: true
-      },
-      city: {
-         type: String,
-         required: true
-      },
-      district: {
-         type: String,
-         required: true
-      },
-   },
    computed: {
-      currentData() {
-         if (this.pharmacyArr.length === 0) return [];
-         return this.pharmacyArr.filter(pharmacy => {
-            let { county, town } = pharmacy.properties;
-            return county === this.city && town === this.district;
-         });
-      },
-      areaPosition() {
-         let [ lng, lat ] = this.currentData[0].geometry.coordinates;
-         return { lng, lat };
-      }
+      ...mapGetters(['mapInfo'])
    },
    methods: {
       initMap() {
          controller.map = L.map('map', {
             center: [24.9875278, 121.3646047],
-            zoom: 16
+            zoom: 15
          });
          L.tileLayer(mapKey, {
             maxZoom: 20,
          }).addTo(controller.map);
+         this.$store.commit('setMap', controller.map);
       },
-      addMark() {
-         this.currentData.forEach(item => {
-            controller.addMark(item);
+      addMarker() {
+         controller.removeMarker();
+         this.mapInfo.forEach(item => {
+            controller.addMarker(item);
          });
+         this.$store.commit('setMarkerArr', controller.markerArr);
       },
    },
    watch: {
-      currentData() {
-         controller.removeMarker();
-         this.addMark();
-         controller.panto(this.areaPosition);
+      mapInfo(val) {
+         this.addMarker();
+         controller.panto(val[0].geometry.coordinates);
       }
    },
    mounted() {
@@ -65,18 +42,3 @@ export default {
    }
 }
 </script>
-
-<style lang="scss">
-#map {
-   width: 100%;
-   height: 100vh;
-}
-
-.leaflet-popup-content > * {
-   font-size: 15px;
-}
-
-.leaflet-popup-content p {
-   margin: 5px 0;
-}
-</style>

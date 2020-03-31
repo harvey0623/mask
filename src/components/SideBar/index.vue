@@ -1,59 +1,36 @@
 <template>
 <div class="sideBar">
-   <CityBox
-      :cityA.sync="cityA"
-      :districtA.sync="districtA"
-   ></CityBox>
+   <div class="topBox">
+      <CitySelect></CitySelect>
+   </div>
+   <ul class="listBox">
+      <PharmacyList
+         v-for="item in mapInfo"
+         :key="item.properties.id"
+         :name="item.properties.name"
+         :adultCount="item.properties.mask_adult"
+         :childCount="item.properties.mask_child"
+         :address="item.properties.address"
+         :updated="item.properties.updated"
+         :note="item.properties.note"
+         :lng="item.geometry.coordinates[0]"
+         :lat="item.geometry.coordinates[1]"
+      ></PharmacyList>
+   </ul>
 </div>
 </template>
 
 <script>
-import CityBox from './CityBox.vue';
+import { mapGetters } from 'vuex';
+import CitySelect from './CitySelect.vue';
+import PharmacyList from './PharmacyList.vue';
 export default {
-   props: {
-      city: {
-         type: String,
-         required: true
-      },
-      district: {
-         type: String,
-         required: true
-      },
-   },
    computed: {
-      cityA: {
-         get() {
-            return this.city;
-         },
-         set(val) {
-            this.$emit('update:city', val);
-         }
-      },
-      districtA: {
-         get() {
-            return this.district;
-         },
-         set(val) {
-            this.$emit('update:district', val);
-         }
-      },
+      ...mapGetters(['mapInfo']),
    },
 	components: {
-      CityBox
+      CitySelect,
+      PharmacyList
    }
 }
 </script>
-
-<style lang="scss">
-.sideBar {
-   position: fixed;
-   left: 0;
-   top: 0;
-   width: 300px;
-   height: 100%;
-   padding: 15px;
-   background-color: #fff;
-   overflow: auto;
-   z-index: 2;
-}
-</style>

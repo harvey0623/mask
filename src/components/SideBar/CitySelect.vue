@@ -1,13 +1,13 @@
 <template>
 <div class="cityBox">
-   <select class="form-control city-select" v-model="cityB">
+   <select class="form-control city-select" v-model="currentCity">
       <option 
          v-for="(city,index) in cityList"
          :key="index"
          :value="city.cityName"
       >{{ city.cityName }}</option>
    </select>
-   <select class="form-control" v-model="districtB">
+   <select class="form-control" v-model="currentTown">
       <option 
          v-for="(item,index) in districtList"
          :key="index"
@@ -19,36 +19,19 @@
 
 <script>
 import area from './area.js';
+import { mapState, mapMutations } from 'vuex';
 export default {
-   props: {
-      cityA: {
-         type: String,
-         required: true
-      },
-      districtA: {
-         type: String,
-         required: true
-      },
-   },
 	data: () => ({
       area
    }),
    computed: {
-      cityB: {
-         get() {
-            return this.cityA;
-         },
-         set(val) {
-            this.$emit('update:cityA', val);
-         }
+      currentCity: {
+         ...mapState({ get: state => state.area.county }),
+         ...mapMutations({ set: 'setCounty' })
       },
-      districtB: {
-         get() {
-            return this.districtA;
-         },
-         set(val) {
-            this.$emit('update:districtA', val);
-         }
+      currentTown: {
+         ...mapState({ get: state => state.area.town }),
+         ...mapMutations({ set: 'setTown' })
       },
       cityList() {
          if (this.area.length === 0) return [];
@@ -58,21 +41,18 @@ export default {
          }, []);
       },
       districtList() {
-         if (this.area.length === 0) return [];
-         let targetCity = this.area.find(item => item.CityName === this.cityB);
+         let targetCity = this.area.find(item => item.CityName === this.currentCity);
          if (targetCity !== undefined) {
-            this.districtB = targetCity.AreaList[0].AreaName;
             return targetCity.AreaList;
          } else {
             return [];
          }
       }
+   },
+   watch: {
+      districtList(to) {
+         this.currentTown = this.districtList[0].AreaName;
+      }
    }
 }
 </script>
-
-<style lang="scss">
-.city-select {
-   margin-bottom: 15px;
-}
-</style>

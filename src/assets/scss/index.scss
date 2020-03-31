@@ -1,0 +1,81 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ul {
+	list-style: none;
+	margin-bottom: 0;
+}
+
+a {
+	display: inline-block;
+}
+
+#app {
+	padding-left: 400px;
+}
+
+//===map
+#map {
+   width: 100%;
+   height: 100vh;
+}
+
+.leaflet-popup-content > * {
+   font-size: 15px;
+}
+
+.leaflet-popup-content p {
+   margin: 5px 0;
+}
+
+//===sideBar
+.sideBar {
+   position: fixed;
+   left: 0;
+   top: 0;
+   width: 400px;
+   height: 100%;
+   padding: 15px;
+   background-color: #fff;
+   z-index: 2;
+   >.topBox {
+      padding-bottom: 15px;   
+   }
+   >.listBox {
+      height: calc(100vh - 106px - 15px);
+      margin-left: -15px;
+      margin-right: -15px;
+      overflow: auto;
+   }
+}
+
+//===select
+.city-select {
+   margin-bottom: 15px;
+}
+
+//===list
+.pharmacyList {
+   padding: 15px 15px;
+   border-bottom: 1px solid #ddd;
+   cursor: pointer;
+   &.active {
+      background-color: #e9ffe3;
+   }
+   &:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+   }
+   >* {
+      margin-bottom: 8px;
+      &:last-child {
+         margin-bottom: 0;
+      }
+   }
+   >h3 {
+      font-size: 25px;
+   }
+}
