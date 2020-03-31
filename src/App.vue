@@ -1,16 +1,13 @@
 <template>
 <div id="app">
-	<SideBar
-		:city.sync="area.city"
-		:district.sync="area.district"
-	></SideBar>
-	<div class="mapBox">
+	<SideBar></SideBar>
+	<!-- <div class="mapBox">
 		<Map
 			:pharmacyArr="pharmacyArr"
 			:city="area.city"
 			:district="area.district"
 		></Map>
-	</div>
+	</div> -->
 </div>
 </template>
 
@@ -21,19 +18,13 @@ import axios from 'axios';
 const apiUrl = 'https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json';
 export default {
 	data: () => ({
-		pharmacyArr: [],
-		area: {
-			city: '臺北市',
-			district: '大安區'
-		},
+		
 	}),
 	methods: {
-		getData() {
-			return axios.get(apiUrl);
-		}
+		
 	},
 	async created() {
-		this.pharmacyArr = await this.getData().then(res => res.data.features);
+		this.$store.dispatch('getData')
 	},
 	components: {
 		Map,

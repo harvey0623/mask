@@ -1,45 +1,14 @@
 <template>
 <div class="sideBar">
-   <CityBox
-      :cityA.sync="cityA"
-      :districtA.sync="districtA"
-   ></CityBox>
+   <CitySelect></CitySelect>
 </div>
 </template>
 
 <script>
-import CityBox from './CityBox.vue';
+import CitySelect from './CitySelect.vue';
 export default {
-   props: {
-      city: {
-         type: String,
-         required: true
-      },
-      district: {
-         type: String,
-         required: true
-      },
-   },
-   computed: {
-      cityA: {
-         get() {
-            return this.city;
-         },
-         set(val) {
-            this.$emit('update:city', val);
-         }
-      },
-      districtA: {
-         get() {
-            return this.district;
-         },
-         set(val) {
-            this.$emit('update:district', val);
-         }
-      },
-   },
 	components: {
-      CityBox
+      CitySelect
    }
 }
 </script>
