@@ -14,8 +14,6 @@
 <script>
 import Map from '@/components/Map/index.vue';
 import SideBar from '@/components/SideBar/index.vue';
-import axios from 'axios';
-const apiUrl = 'https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json';
 export default {
 	data: () => ({
 		
@@ -24,7 +22,7 @@ export default {
 		
 	},
 	async created() {
-		this.$store.dispatch('getData')
+		this.$store.dispatch('getData');
 	},
 	components: {
 		Map,
