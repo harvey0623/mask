@@ -40,13 +40,16 @@ a {
    height: 100%;
    padding: 15px;
    background-color: #fff;
-   overflow: auto;
    z-index: 2;
-}
-.listBox {
-   margin-left: -15px;
-   margin-right: -15px;
-   margin-top: 15px;
+   >.topBox {
+      padding-bottom: 15px;   
+   }
+   >.listBox {
+      height: calc(100vh - 106px - 15px);
+      margin-left: -15px;
+      margin-right: -15px;
+      overflow: auto;
+   }
 }
 
 //===select

@@ -1,6 +1,8 @@
 <template>
 <div class="sideBar">
-   <CitySelect></CitySelect>
+   <div class="topBox">
+      <CitySelect></CitySelect>
+   </div>
    <ul class="listBox">
       <PharmacyList
          v-for="item in mapInfo"
