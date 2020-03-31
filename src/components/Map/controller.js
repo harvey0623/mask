@@ -25,7 +25,7 @@ export default class Controller {
          <p class="updateTime">更新時間:${data.updated}</p>`
    }
    createIcon({ mask_adult, mask_child }) {
-      let iconColor = mask_adult !== 0 && mask_child !== 0 ? '2x-green' : '2x-grey'; 
+      let iconColor = mask_adult !== 0 || mask_child !== 0 ? '2x-green' : '2x-grey'; 
       return new L.Icon({
          iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-${iconColor}.png`,
          shadowUrl: `https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png`,
