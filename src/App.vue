@@ -32,7 +32,16 @@ export default {
 	box-sizing: border-box;
 }
 
+ul {
+	list-style: none;
+	margin-bottom: 0;
+}
+
+a {
+	display: inline-block;
+}
+
 #app {
-	padding-left: 300px;
+	padding-left: 400px;
 }
 </style>

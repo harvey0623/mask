@@ -16,7 +16,7 @@ export default {
       initMap() {
          controller.map = L.map('map', {
             center: [24.9875278, 121.3646047],
-            zoom: 14
+            zoom: 15
          });
          L.tileLayer(mapKey, {
             maxZoom: 20,
