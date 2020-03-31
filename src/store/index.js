@@ -10,6 +10,7 @@ export default new Vuex.Store({
 			county: '臺北市',
 			town: '中正區'
 		},
+		markerArr: []
 	},
 	mutations: {
 		setPharmacy(state, value) {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
 		setTown(state, value) {
 			console.log(value);
 			state.area.town = value;
+		},
+		setMarkerArr(state, value) {
+			state.markerArr = value;
 		}
 	},
 	getters: {

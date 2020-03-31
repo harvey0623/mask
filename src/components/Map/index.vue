@@ -27,6 +27,7 @@ export default {
          this.mapInfo.forEach(item => {
             controller.addMarker(item);
          });
+         this.$store.commit('setMarkerArr', controller.markerArr);
       },
    },
    watch: {
