@@ -9,7 +9,6 @@ export default class Controller {
       let icon = this.createIcon(properties);
       let marker = L.marker([lat, lng], { icon }).addTo(this.map)
          .bindPopup(this.renderHtml(properties));
-      // marker.openPopup();
       this.markerArr.push(marker);
    }
    renderHtml(data) {

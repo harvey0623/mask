@@ -40,14 +40,14 @@ export default {
    top: 0;
    width: 400px;
    height: 100%;
-   padding: 15px 15px 0;
+   padding: 15px;
    background-color: #fff;
    overflow: auto;
    z-index: 2;
 }
-
 .listBox {
    margin-left: -15px;
    margin-right: -15px;
+   margin-top: 15px;
 }
 </style>

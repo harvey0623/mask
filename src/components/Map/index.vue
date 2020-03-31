@@ -21,6 +21,7 @@ export default {
          L.tileLayer(mapKey, {
             maxZoom: 20,
          }).addTo(controller.map);
+         this.$store.commit('setMap', controller.map);
       },
       addMarker() {
          controller.removeMarker();

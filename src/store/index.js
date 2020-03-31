@@ -10,7 +10,8 @@ export default new Vuex.Store({
 			county: '臺北市',
 			town: '中正區'
 		},
-		markerArr: []
+		markerArr: [],
+		map: null
 	},
 	mutations: {
 		setPharmacy(state, value) {
@@ -20,11 +21,13 @@ export default new Vuex.Store({
 			state.area.county = value;
 		},
 		setTown(state, value) {
-			console.log(value);
 			state.area.town = value;
 		},
 		setMarkerArr(state, value) {
 			state.markerArr = value;
+		},
+		setMap(state, value) {
+			state.map = value;
 		}
 	},
 	getters: {
@@ -34,6 +37,13 @@ export default new Vuex.Store({
 				let { county, town } = item.properties;
 				let { county: userCounty, town: userTown } = state.area;
 				return county === userCounty && town === userTown;
+			});
+		},
+		getMarker: (state) => (coordinate) => {
+			let { lng:userLng, lat:userLat } = coordinate;
+			return state.markerArr.find(marker => {
+				let { lng, lat } = marker._latlng;
+				return lng === userLng && lat === userLat;
 			});
 		}
 	},
