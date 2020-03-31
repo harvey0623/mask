@@ -56,9 +56,3 @@ export default {
    }
 }
 </script>
-
-<style lang="scss">
-.city-select {
-   margin-bottom: 15px;
-}
-</style>

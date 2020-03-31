@@ -42,18 +42,3 @@ export default {
    }
 }
 </script>
-
-<style lang="scss">
-#map {
-   width: 100%;
-   height: 100vh;
-}
-
-.leaflet-popup-content > * {
-   font-size: 15px;
-}
-
-.leaflet-popup-content p {
-   margin: 5px 0;
-}
-</style>

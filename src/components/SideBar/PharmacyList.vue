@@ -69,33 +69,9 @@ export default {
          let marker = this.$store.getters.getMarker({ lng, lat });
          if (marker !== undefined) {
             marker.openPopup();
-            this.mapInstance.setView([lat, lng]);
+            if (this.mapInstance !== null) this.mapInstance.setView([lat, lng]);
          }
       }
    },
 }
 </script>
-
-<style lang="scss">
-.pharmacyList {
-   padding: 15px 15px;
-   border-bottom: 1px solid #ddd;
-   cursor: pointer;
-   &.active {
-      background-color: #e9ffe3;
-   }
-   &:last-child {
-      margin-bottom: 0;
-      border-bottom: none;
-   }
-   >* {
-      margin-bottom: 8px;
-      &:last-child {
-         margin-bottom: 0;
-      }
-   }
-   >h3 {
-      font-size: 25px;
-   }
-}
-</style>

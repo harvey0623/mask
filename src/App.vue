@@ -26,22 +26,5 @@ export default {
 </script>
 
 <style lang="scss">
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-ul {
-	list-style: none;
-	margin-bottom: 0;
-}
-
-a {
-	display: inline-block;
-}
-
-#app {
-	padding-left: 400px;
-}
+@import '@/assets/scss/index.scss';
 </style>
