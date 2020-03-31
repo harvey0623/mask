@@ -2,7 +2,7 @@ export default class Controller {
    constructor() {
       this.map = null;
    }
-   addMark(item) {
+   addMarker(item) {
       let { geometry, properties } = item;
       let [ lng, lat ] = geometry.coordinates;
       let marker = L.marker([lat, lng]).addTo(this.map)
@@ -22,16 +22,14 @@ export default class Controller {
          <p class="updateTime">更新時間:${data.updated}</p>`
    }
    removeMarker() {
-      this.map.eachLayer((layer) => {
+      this.map.eachLayer(layer => {
          if (layer instanceof L.Marker) {
             this.map.removeLayer(layer);
          }
       });
    }
-   panto(position) {
-      let { lat, lng } = position;
-      this.map.panTo([lat, lng], {
-         animate: false
-      });
+   panto(coordinate) {
+      let [lng, lat] = coordinate;
+      this.map.panTo([lat, lng]);
    }
 }

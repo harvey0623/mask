@@ -1,13 +1,7 @@
 <template>
 <div id="app">
 	<SideBar></SideBar>
-	<!-- <div class="mapBox">
-		<Map
-			:pharmacyArr="pharmacyArr"
-			:city="area.city"
-			:district="area.district"
-		></Map>
-	</div> -->
+	<Map></Map>
 </div>
 </template>
 
