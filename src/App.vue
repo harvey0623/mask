@@ -1,47 +1,30 @@
 <template>
 <div id="app">
-	<Map
-		:pharmacyArr="pharmacyArr"
-		:city="area.city"
-		:district="area.district"
-	></Map>
+	<SideBar></SideBar>
+	<Map></Map>
 </div>
 </template>
 
 <script>
 import Map from '@/components/Map/index.vue';
-import axios from 'axios';
-const apiUrl = 'https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json';
+import SideBar from '@/components/SideBar/index.vue';
 export default {
 	data: () => ({
-		pharmacyArr: [],
-		area: {
-			city: '臺北市',
-			district: '大安區'
-		},
-		centerPos: {
-			lng: 0,
-			lat: 0
-		}
+		
 	}),
 	methods: {
-		getData() {
-			return axios.get(apiUrl);
-		}
+		
 	},
 	async created() {
-		this.pharmacyArr = await this.getData().then(res => res.data.features);
+		this.$store.dispatch('getData');
 	},
 	components: {
-		Map
+		Map,
+		SideBar
 	},
 }
 </script>
 
 <style lang="scss">
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+@import '@/assets/scss/index.scss';
 </style>
