@@ -22,9 +22,11 @@ import area from './area.js';
 import { mapState, mapMutations } from 'vuex';
 export default {
 	data: () => ({
-      area
+      area,
+      isFirst: true
    }),
    computed: {
+      ...mapState(['allowPos']),
       currentCity: {
          ...mapState({ get: state => state.area.county }),
          ...mapMutations({ set: 'setCounty' })
@@ -57,7 +59,11 @@ export default {
    },
    watch: {
       districtList() {
-         this.currentTown = this.districtList[0].AreaName;
+         if (this.isFirst && this.allowPos) {
+            this.isFirst = false;
+         } else {
+            this.currentTown = this.districtList[0].AreaName;
+         }
       },
       currentTown() {
          this.resetHandler();

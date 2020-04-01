@@ -3,19 +3,28 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import L from 'leaflet';
+import { mapState ,mapGetters } from 'vuex';
 import Controller from './controller.js';
 const mapKey = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const controller = new Controller();
 export default {
+   props: {
+      defaultPos: {
+         type: Object,
+         required: true
+      }
+   },
+   data: () => ({
+      isFirst: true
+   }),
    computed: {
+      ...mapState(['allowPos']),
       ...mapGetters(['mapInfo'])
    },
    methods: {
       initMap() {
          controller.map = L.map('map', {
-            center: [24.9875278, 121.3646047],
+            center: [this.defaultPos.lat, this.defaultPos.lng],
             zoom: 15
          });
          L.tileLayer(mapKey, {
@@ -34,7 +43,12 @@ export default {
    watch: {
       mapInfo(val) {
          this.addMarker();
-         controller.panto(val[0].geometry.coordinates);
+         if (this.isFirst && this.allowPos) {
+            this.isFirst = false;
+            controller.panto([this.defaultPos.lng, this.defaultPos.lat]);
+         } else {
+            controller.panto(val[0].geometry.coordinates);
+         }
       }
    },
    mounted() {
