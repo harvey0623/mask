@@ -45,8 +45,6 @@ export default class Controller {
    }
    panto(coordinate) {
       let [lng, lat] = coordinate;
-      this.map.panTo([lat, lng], {
-         animate: false
-      });
+      this.map.setView([lat, lng]);
    }
 }
