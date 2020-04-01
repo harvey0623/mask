@@ -45,14 +45,15 @@ a {
    padding-bottom: 0;
    background-color: #fff;
    z-index: 2;
+   overflow: auto;
    >.topBox {
       padding-bottom: 10px;   
    }
    >.listBox {
-      height: calc(100vh - 180px - 15px);
+      height: calc(100vh - 180px);
       margin-left: -15px;
       margin-right: -15px;
-      overflow: auto;
+      // overflow: auto;
    }
 }
 
