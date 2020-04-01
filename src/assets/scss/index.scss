@@ -48,7 +48,7 @@ a {
       padding-bottom: 15px;   
    }
    >.listBox {
-      height: calc(100vh - 106px - 15px);
+      height: calc(100vh - 185px - 15px);
       margin-left: -15px;
       margin-right: -15px;
       overflow: auto;
@@ -61,6 +61,14 @@ a {
    >.city-select {
       margin-bottom: 15px;
    }
+}
+
+.tip {
+   margin: 0;
+   margin-top: 5px;
+   font-size: 14px;
+   color: gray;
+   text-align: right;
 }
 
 //===list

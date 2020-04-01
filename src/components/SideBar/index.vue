@@ -3,6 +3,7 @@
    <div class="topBox">
       <CitySelect @reset="resetHandler"></CitySelect>
       <SearchInput :text.sync="text"></SearchInput>
+      <p class="tip">(綠色代表還有口罩)</p>
    </div>
    <ul class="listBox" ref="listBox">
       <PharmacyList
