@@ -42,6 +42,7 @@ export default {
       },
       districtList() {
          let targetCity = this.area.find(item => item.CityName === this.currentCity);
+         this.resetHandler();
          if (targetCity !== undefined) {
             return targetCity.AreaList;
          } else {
@@ -49,9 +50,17 @@ export default {
          }
       }
    },
+   methods: {
+      resetHandler() {
+         this.$emit('reset');
+      }
+   },
    watch: {
-      districtList(to) {
+      districtList() {
          this.currentTown = this.districtList[0].AreaName;
+      },
+      currentTown() {
+         this.resetHandler();
       }
    }
 }

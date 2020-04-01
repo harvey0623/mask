@@ -1,11 +1,12 @@
 <template>
 <div class="sideBar">
    <div class="topBox">
-      <CitySelect></CitySelect>
+      <CitySelect @reset="resetHandler"></CitySelect>
+      <SearchInput :text.sync="text"></SearchInput>
    </div>
-   <ul class="listBox">
+   <ul class="listBox" ref="listBox">
       <PharmacyList
-         v-for="item in mapInfo"
+         v-for="item in filterInfo"
          :key="item.properties.id"
          :name="item.properties.name"
          :adultCount="item.properties.mask_adult"
@@ -24,13 +25,31 @@
 import { mapGetters } from 'vuex';
 import CitySelect from './CitySelect.vue';
 import PharmacyList from './PharmacyList.vue';
+import SearchInput from './SearchInput.vue';
 export default {
+   data: () => ({
+      text: ''
+   }),
    computed: {
       ...mapGetters(['mapInfo']),
+      filterInfo() {
+         if (this.text === '') return this.mapInfo;
+			return this.mapInfo.filter(item => {
+				return item.properties.name.includes(this.text);
+			});
+      }
+   },
+   methods: {
+      resetHandler() {
+         this.text = '';
+         let listBox = this.$refs.listBox;
+         if (listBox !== undefined) listBox.scrollTop = 0;
+      }
    },
 	components: {
       CitySelect,
-      PharmacyList
+      PharmacyList,
+      SearchInput
    }
 }
 </script>
