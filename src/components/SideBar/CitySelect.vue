@@ -22,7 +22,8 @@ import area from './area.js';
 import { mapState, mapMutations } from 'vuex';
 export default {
 	data: () => ({
-      area
+      area,
+      isFirst: true
    }),
    computed: {
       currentCity: {
@@ -57,7 +58,11 @@ export default {
    },
    watch: {
       districtList() {
-         this.currentTown = this.districtList[0].AreaName;
+         if (this.isFirst) {
+            this.isFirst = false;
+         } else {
+            this.currentTown = this.districtList[0].AreaName;
+         }
       },
       currentTown() {
          this.resetHandler();
