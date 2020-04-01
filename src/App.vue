@@ -1,7 +1,9 @@
 <template>
 <div id="app">
 	<SideBar></SideBar>
-	<Map :defaultPos="defaultPos"></Map>
+	<div class="mapOuter" :class="{invisible: isLoading}">
+		<Map :defaultPos="defaultPos"></Map>
+	</div>
 </div>
 </template>
 
@@ -15,7 +17,8 @@ export default {
 		defaultPos: {
 			lat: 25.0339808,
 			lng: 121.5623502
-		}
+		},
+		isLoading: false
 	}),
 	methods: {
 		getAddress({ lat, lng }) {
@@ -36,6 +39,7 @@ export default {
 		}
 	},
 	async created() {
+		this.isLoading = true;
 		if (geoLocation.checkSupport()) {
 			let { success, lat, lng } = await geoLocation.getPosition().then(res => res);
 			if (success) {
@@ -47,7 +51,8 @@ export default {
 				}
 			}
 		}
-		this.$store.dispatch('getData');
+		await this.$store.dispatch('getData');
+		this.isLoading = false;
 	},
 	components: {
 		Map,

@@ -21,6 +21,13 @@ a {
 	padding-left: $sideBarWidth;
 }
 
+.mapOuter {
+   opacity: 1;
+   &.invisible {
+      opacity: 0;
+   }
+}
+
 #map {
    width: 100%;
    height: 100vh;
