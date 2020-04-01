@@ -26,6 +26,7 @@ export default {
       isFirst: true
    }),
    computed: {
+      ...mapState(['allowPos']),
       currentCity: {
          ...mapState({ get: state => state.area.county }),
          ...mapMutations({ set: 'setCounty' })
@@ -58,7 +59,7 @@ export default {
    },
    watch: {
       districtList() {
-         if (this.isFirst) {
+         if (this.isFirst && this.allowPos) {
             this.isFirst = false;
          } else {
             this.currentTown = this.districtList[0].AreaName;

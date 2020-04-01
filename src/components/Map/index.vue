@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState ,mapGetters } from 'vuex';
 import Controller from './controller.js';
 const mapKey = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const controller = new Controller();
@@ -18,6 +18,7 @@ export default {
       isFirst: true
    }),
    computed: {
+      ...mapState(['allowPos']),
       ...mapGetters(['mapInfo'])
    },
    methods: {
@@ -42,7 +43,7 @@ export default {
    watch: {
       mapInfo(val) {
          this.addMarker();
-         if (this.isFirst) {
+         if (this.isFirst && this.allowPos) {
             this.isFirst = false;
             controller.panto([this.defaultPos.lng, this.defaultPos.lat]);
          } else {

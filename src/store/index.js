@@ -7,12 +7,13 @@ export default new Vuex.Store({
 	strict: false,
 	state: {
 		pharmacy: [],
+		markerArr: [],
+		map: null,
+		allowPos: false,
 		area: {
 			county: '臺北市',
 			town: '中正區'
-		},
-		markerArr: [],
-		map: null
+		}
 	},
 	mutations: {
 		setPharmacy(state, value) {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
 		},
 		setMap(state, value) {
 			state.map = value;
+		},
+		setAllowPos(state, value) {
+			state.allowPos = value;
 		}
 	},
 	getters: {

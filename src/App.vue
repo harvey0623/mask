@@ -1,13 +1,14 @@
 <template>
 <div id="app">
 	<SideBar></SideBar>
-	<div class="mapOuter" :class="{invisible: isLoading}">
-		<Map :defaultPos="defaultPos"></Map>
-	</div>
+	<Map :defaultPos="defaultPos"></Map>
+	<Loading v-if="isLoading"></Loading>
 </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+import Loading from '@/components/Loading/index.vue';
 import Map from '@/components/Map/index.vue';
 import SideBar from '@/components/SideBar/index.vue';
 import Gps from '@/components/Map/gps.js';
@@ -21,6 +22,7 @@ export default {
 		isLoading: false
 	}),
 	methods: {
+		...mapMutations(['setAllowPos', 'setCounty', 'setTown']),
 		getAddress({ lat, lng }) {
 			return new Promise((resolve, reject) => {
 				L.esri.Geocoding.reverseGeocode().latlng([lat, lng])
@@ -43,18 +45,22 @@ export default {
 		if (geoLocation.checkSupport()) {
 			let { success, lat, lng } = await geoLocation.getPosition().then(res => res);
 			if (success) {
+				this.setAllowPos(true);
 				let addrInfo = await this.getAddress({ lat, lng }).then(res => res);
 				if (addrInfo.success) {
 					this.defaultPos = { lat, lng };
-					this.$store.commit('setCounty', addrInfo.county.replace('台', '臺'));
-					this.$store.commit('setTown', addrInfo.town);
+					this.setCounty(addrInfo.county.replace('台', '臺'));
+					this.setTown(addrInfo.town);
 				}
+			} else {
+				this.setAllowPos(false);
 			}
 		}
 		await this.$store.dispatch('getData');
 		this.isLoading = false;
 	},
 	components: {
+		Loading,
 		Map,
 		SideBar
 	},
