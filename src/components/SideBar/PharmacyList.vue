@@ -1,7 +1,7 @@
 <template>
 <li 
    class="pharmacyList" 
-   :class="{active: hasStock}"
+   :class="{active: hasStock, disabled: noStock}"
    @click="moveMap">
    <h3>{{ name }}</h3>
    <p>成人: {{ adultCount }}個 / 小孩: {{ childCount }}個</p>
@@ -53,6 +53,9 @@ export default {
    computed: {
       hasStock() {
          return this.adultCount > 0 || this.childCount > 0;
+      },
+      noStock() {
+         return this.adultCount === 0 && this.childCount === 0;
       },
       addressUrl() {
          let url = 'https://www.google.com.tw/maps/place/';
