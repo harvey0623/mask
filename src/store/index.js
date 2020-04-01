@@ -4,6 +4,7 @@ import axios from 'axios';
 Vue.use(Vuex);
 const apiUrl = 'https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json';
 export default new Vuex.Store({
+	strict: false,
 	state: {
 		pharmacy: [],
 		area: {

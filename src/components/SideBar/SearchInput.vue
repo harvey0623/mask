@@ -3,7 +3,8 @@
    type="text" 
    class="form-control" 
    placeholder="輸入藥局名稱"
-   @input="inputHandler">
+   @input="inputHandler"
+   :value="keyword">
 </template>
 
 <script>
