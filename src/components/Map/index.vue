@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapState ,mapGetters } from 'vuex';
+import { mapState, mapMutations, mapGetters } from 'vuex';
 import Controller from './controller.js';
 const mapKey = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const controller = new Controller();
@@ -22,6 +22,7 @@ export default {
       ...mapGetters(['mapInfo'])
    },
    methods: {
+      ...mapMutations(['setMap', 'setMarkerArr']),
       initMap() {
          controller.map = L.map('map', {
             center: [this.defaultPos.lat, this.defaultPos.lng],
@@ -30,14 +31,14 @@ export default {
          L.tileLayer(mapKey, {
             maxZoom: 20,
          }).addTo(controller.map);
-         this.$store.commit('setMap', controller.map);
+         this.setMap(controller.map);
       },
       addMarker() {
          controller.removeMarker();
          this.mapInfo.forEach(item => {
             controller.addMarker(item);
          });
-         this.$store.commit('setMarkerArr', controller.markerArr);
+         this.setMarkerArr(controller.markerArr);
       },
    },
    watch: {

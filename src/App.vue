@@ -49,6 +49,7 @@ export default {
 				let addrInfo = await this.getAddress({ lat, lng }).then(res => res);
 				if (addrInfo.success) {
 					this.defaultPos = { lat, lng };
+					alert(addrInfo.county);
 					this.setCounty(addrInfo.county.replace('台', '臺'));
 					this.setTown(addrInfo.town);
 				}
