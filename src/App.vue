@@ -28,7 +28,6 @@ export default {
 				L.esri.Geocoding.reverseGeocode().latlng([lat, lng])
 					.run((err, result, res) => {
 						if (!err) {
-							console.log(result)
 							return resolve({
 								success: true,
 								county: result.address.Region,

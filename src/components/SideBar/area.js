@@ -1635,12 +1635,7 @@ export default [
 				"ZipCode": "894",
 				"AreaName": "烈嶼鄉",
 				"AreaEngName": "Lieyu Township",
-			},
-			{
-				"ZipCode": "896",
-				"AreaName": "烏坵鄉",
-				"AreaEngName": "Wuqiu Township",
-			},
+			}
 		],
 	},
 	{
