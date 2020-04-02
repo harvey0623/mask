@@ -1,6 +1,6 @@
 <template>
 <div class="cityBox">
-   <select class="form-control city-select" v-model="currentCity">
+   <select class="form-control" v-model="currentCity">
       <option 
          v-for="(city,index) in cityList"
          :key="index"

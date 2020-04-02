@@ -48,20 +48,23 @@ a {
    background-color: #fff;
    z-index: 2;
    >.topBox {
-      height: 195px;
-      padding: 15px 15px 10px;
+      height: 135px;
+      padding: 15px;
    }
    >.listBox {
-      height: calc(100vh - 195px);
+      height: calc(100vh - 135px);
       overflow: auto;
    }
 }
 
 //===select
 .cityBox {
-   margin-bottom: 15px;
-   >.city-select {
-      margin-bottom: 15px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 10px;
+   >.form-control {
+      flex: 0 0 48%;
    }
 }
 
