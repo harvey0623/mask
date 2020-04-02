@@ -36,12 +36,15 @@ export default new Vuex.Store({
 		}
 	},
 	getters: {
-		mapInfo(state) {
+		initInfo(state) {
 			if (state.pharmacy.length === 0) return [];
 			return state.pharmacy.filter(item => {
-				let { county, town } = item.properties;
-				let { county: userCounty, town: userTown } = state.area;
-				return county === userCounty && town === userTown;
+				return item.properties.county === state.area.county;
+			});
+		},
+		mapInfo(state, getters) {
+			return getters.initInfo.filter(item => {
+				return item.properties.town === state.area.town;
 			});
 		},
 		getMarker: (state) => (coordinate) => {
