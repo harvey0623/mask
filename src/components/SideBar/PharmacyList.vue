@@ -1,14 +1,16 @@
 <template>
 <li 
    class="pharmacyList" 
-   :class="{active: hasStock}"
+   :class="{active: hasStock, disabled: !hasStock}"
    @click="moveMap">
    <h3>{{ name }}</h3>
    <p>成人: {{ adultCount }}個 / 小孩: {{ childCount }}個</p>
-   <a 
-      :href="addressUrl" 
-      target="_blank"
-   >{{ address }}</a>
+   <p>地址: 
+      <a 
+         :href="addressUrl" 
+         target="_blank"
+      >{{ address }}</a>
+   </p>
    <p>更新時間: {{ updated }}</p>
    <p>備註: {{ note }}</p>
 </li>
@@ -72,6 +74,6 @@ export default {
             if (this.mapInstance !== null) this.mapInstance.setView([lat, lng]);
          }
       }
-   },
+   }
 }
 </script>

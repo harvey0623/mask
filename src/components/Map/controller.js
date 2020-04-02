@@ -22,7 +22,7 @@ export default class Controller {
          </p>  
          <a href="${url + data.address}" target="_blank">地址:${data.address}</a>
          <p class="phone">電話:${data.phone}</p>
-         <p class="updateTime">更新時間:${data.updated}</p>`
+         <p class="updateTime">更新時間:${data.updated}</p>`;
    }
    createIcon({ mask_adult, mask_child }) {
       let iconColor = mask_adult !== 0 || mask_child !== 0 ? '2x-green' : '2x-grey'; 
