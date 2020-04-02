@@ -11,8 +11,8 @@ export default new Vuex.Store({
 		map: null,
 		allowPos: false,
 		area: {
-			county: '臺北市',
-			town: '中正區'
+			county: '',
+			town: ''
 		}
 	},
 	mutations: {

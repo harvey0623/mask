@@ -42,11 +42,12 @@ export default {
       },
    },
    watch: {
-      mapInfo(val) {
+      mapInfo(val) {  //如果是地一次變動使用預設座標,其他次使用地一個點的位子
          this.addMarker();
          if (this.isFirst && this.allowPos) {
             this.isFirst = false;
-            controller.panto([this.defaultPos.lng, this.defaultPos.lat]);
+            let { lat, lng } = this.defaultPos;
+            controller.panto([lng, lat]);
          } else {
             controller.panto(val[0].geometry.coordinates);
          }

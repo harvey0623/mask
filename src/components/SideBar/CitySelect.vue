@@ -58,11 +58,11 @@ export default {
       }
    },
    watch: {
-      districtList() {
+      districtList(val) {
          if (this.isFirst && this.allowPos) {
             this.isFirst = false;
          } else {
-            this.currentTown = this.districtList[0].AreaName;
+            this.currentTown = val[0].AreaName;
          }
       },
       currentTown() {
